@@ -7,7 +7,6 @@ const { AlreadyOccupiedError } = require("../handler/error/AlreadyOccupiedError"
 const createAccount = async(id, name) => {
   const keypair = Keypair.generate();
   let account=await accountDetails.findOne({owner:id,name});
-  console.log(account,"account");
   if(account){
     throw new AlreadyOccupiedError("Account with the same name exist");
   }
@@ -21,10 +20,8 @@ const createAccount = async(id, name) => {
   return account;
 };
 const requestAirdrop = async (publicKey) => {
-  console.log(publicKey);
   const connection = createConnection();
   const pubkey = new web3.PublicKey(publicKey);
-  console.log(pubkey, "pubkey");
   const airdropSignature = await connection.requestAirdrop(
     pubkey,
     LAMPORTS_PER_SOL
@@ -33,7 +30,6 @@ const requestAirdrop = async (publicKey) => {
   const signature = await connection.confirmTransaction(airdropSignature);
 
   const newBalance = await getBalance(pubkey);
-  console.log(newBalance);
   let account = await accountDetails.findOneAndUpdate(
     { pubKey: publicKey.toString() },
     {
@@ -45,7 +41,6 @@ const requestAirdrop = async (publicKey) => {
   return account;
 };
 const getBalance = async (publicKey) => {
-  console.log(publicKey);
   const connection = createConnection();
 
   const lamports = await connection.getBalance(publicKey).catch((err) => {
@@ -57,7 +52,6 @@ const getBalance = async (publicKey) => {
 
 const accountBalance = async (pubkey) => {
   const account = await accountDetails.findOne({ pubKey: pubkey.toString() });
-  console.log(account);
   return account;
 };
 

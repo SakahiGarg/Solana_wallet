@@ -1,0 +1,24 @@
+@host = http://localhost:5000/api/account
+
+###
+GET {{host}}/balance/7WT1XJ6SqAeWbWchRDRbAngmV87TheQJAQh9HAv291ZH
+Content-Type: application/json
+
+
+###
+POST {{host}}/requestAirdrop
+Content-Type: application/json
+
+{
+    "publicKey": "7WT1XJ6SqAeWbWchRDRbAngmV87TheQJAQh9HAv291ZH"
+}
+
+
+###
+POST {{host}}/createAccount
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6InVzZXIxIiwiaWF0IjoxNjU4NDA2NDY3LCJleHAiOjE2NjA5OTg0Njd9._vIfCSvJHaS5VuukNgi8wOyBb-MlHeSj8jAkByCnnaY
+Content-Type: application/json
+
+{
+    "name":"Account1"
+}
